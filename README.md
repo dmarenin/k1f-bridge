@@ -1,0 +1,1 @@
+# sample using fisc reg k1f from external db(my sql, bitrix crm, module sberbank)
