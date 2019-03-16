@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.438
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "k1f_fisc_reg", "k1f_fisc_reg\k1f_fisc_reg.pyproj", "{1327A2BB-C0EE-47D3-965D-67574211D942}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "emulate", "emulate\emulate.pyproj", "{E4CEB259-EDB7-4855-A874-FA3A10BC67A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,8 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{1327A2BB-C0EE-47D3-965D-67574211D942}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1327A2BB-C0EE-47D3-965D-67574211D942}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4CEB259-EDB7-4855-A874-FA3A10BC67A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4CEB259-EDB7-4855-A874-FA3A10BC67A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
