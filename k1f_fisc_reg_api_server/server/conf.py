@@ -1,20 +1,13 @@
-#SYS
-T_SLEEP = 5000
+API_SERVER = '0.0.0.0'
+API_PORT = 8081
 
-#DB
-DB_HOST ='localhost'
-DB_USER ='bitrix'
-DB_PASS = '123'
-DB = 'bitrix'
-
-#FISC REG
 OFSSET = 4
 
-SERVER = ('localhost', 7778)
+SERVER = ('192.168.1.99', 49152)
 
-LOGIN = 'admin'
-PASSWORD = '12'
-CON_PASSWORD = 'pass'
+LOGIN = 'LOGIN'
+PASSWORD = 'PASSWORD'
+CON_PASSWORD = 'CON_PASSWORD'
 
 BUF_SIZE = 8192
 
@@ -33,4 +26,6 @@ OPER_LIST.append('CloseShift')
 OPER_LIST.append('OpenCheck')
 OPER_LIST.append('CloseCheck')
 OPER_LIST.append('AddGoods')
+
+PRINT_DOC = False
 

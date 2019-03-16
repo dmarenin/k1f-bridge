@@ -1,4 +1,5 @@
-
+﻿
 k1f_fisc_reg/К1-Ф. Протокол взаимодействия с ККТ.pdf
 k1f_fisc_reg/conf — копия.py
 *.pyc
+k1f_fisc_reg_api_server/etc/*

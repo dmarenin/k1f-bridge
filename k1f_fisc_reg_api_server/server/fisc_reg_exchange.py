@@ -1,5 +1,5 @@
 import json
-from conf import *
+from server.conf import *
 
 
 def message_to_byte(message):
@@ -35,7 +35,7 @@ def init_oper():
         sock = socket.socket()
         sock.connect(SERVER)
     except Exception as e:
-        print(e)
+        raise Exception('Socket error ' + str(e))
         
         return None
 
@@ -45,7 +45,7 @@ def do_oper(oper, sock, **data):
     res = None
 
     if not oper in OPER_LIST:
-        return res
+        raise Exception('Operation is not defined' + str(oper))
 
     session_key = data['session_key']
 
@@ -59,7 +59,8 @@ def do_oper(oper, sock, **data):
     elif oper == 'OpenCheck':
         d['checkType'] = CHECK_TYPE
         d['taxSystem'] = TAX_SYSTEM
-    
+        d['printDoc'] = PRINT_DOC
+
     elif oper == 'CloseCheck':
         d['sendCheckTo'] = data['client']
         d['addInfo'] = data['add_info']
