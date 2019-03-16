@@ -100,7 +100,7 @@ def set_result(res, x):
 def make_payment(client, summ, add_info):
     data = {}
     
-    data['client'] = 'test@mail.ru'
+    data['client'] = client
     data['add_info'] = add_info
     data['cash'] = 0
     data['ecash'] = summ
@@ -114,7 +114,7 @@ def make_payment(client, summ, add_info):
     
     row_goods['code'] = '001'
     row_goods['id'] = '001'
-    row_goods['name'] = 'услуги'
+    row_goods['name'] = add_info
     row_goods['qty'] = 1
     row_goods['price'] = summ
     row_goods['extra_type'] = 0
