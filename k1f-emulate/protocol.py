@@ -112,7 +112,7 @@ RESPONSE['GetStatus'] = """{"result": 0,
  "status": 1,
  "lastDoc": {
  "num": 60,
- "dateTime": "2016-10-01T09:10:24",
+ "dateTime": "2016-10-01T09:10:24"
  },
  "unsignedDocs": {
  "qty": 1,
