@@ -5,3 +5,4 @@ k1f_fisc_reg/conf — копия.py
 k1f_fisc_reg_api_server/etc/*
 b_tszh/operations.db
 b_tszh/secret.py
+b_tszh/bak/*

@@ -11,7 +11,7 @@ from secret import *
 
 T_SLEEP = 60
 
-API_SERVER = '192.168.1.99'
+API_SERVER = '0.0.0.0'
 API_PORT = 8081
 API_MAKE_PAYMENT = 'make_payment'
 
@@ -27,7 +27,24 @@ def get_data_source(last_id):
 
     cursor = connection.cursor()
     
-    query_text = f"SELECT b_tszh_payment.*, b_user.* FROM b_tszh_payment LEFT JOIN b_user ON b_tszh_payment.USER_ID = b_user.ID WHERE b_tszh_payment.ID > {last_id}"
+    #query_text = f"SELECT b_tszh_payment.*, b_user.* FROM b_tszh_payment LEFT JOIN b_user ON b_tszh_payment.USER_ID = b_user.ID WHERE b_tszh_payment.ID > {last_id}"
+    query_text = f"""SELECT 
+b_tszh_payment.ID, 
+b_tszh_payment.DATE_PAYED, 
+b_tszh_payment.EMP_PAYED_ID, 
+b_tszh_payment.SUMM, 
+b_tszh_payment.SUMM_PAYED, 
+b_tszh_payment.CURRENCY, 
+b_tszh_payment.USER_ID, 
+b_tszh_payment.DATE_INSERT, 
+b_tszh_payment.DATE_UPDATE, 
+b_tszh_payment.ACCOUNT_ID,
+
+b_user.EMAIL FROM b_tszh_payment 
+
+LEFT JOIN b_user ON b_tszh_payment.USER_ID = b_user.ID 
+WHERE b_tszh_payment.ID > {last_id} AND PAYED='Y' AND TSZH_ID=1 AND PAY_SYSTEM_ID=2"""
+
     
     try:
         res = cursor.execute(query_text, )
@@ -103,7 +120,7 @@ def make_payment(client, summ, add_info):
     data['client'] = client
     data['add_info'] = add_info
     data['cash'] = 0
-    data['ecash'] = summ
+    data['ecash'] = int(summ*100)
     data['prepayment'] = 0
     data['credit'] = 0
     data['consideration'] = 0
@@ -115,18 +132,20 @@ def make_payment(client, summ, add_info):
     row_goods['code'] = '001'
     row_goods['id'] = '001'
     row_goods['name'] = add_info
-    row_goods['qty'] = 1
-    row_goods['price'] = summ
+    row_goods['qty'] = 10000
+    row_goods['price'] = int(summ*100)
     row_goods['extra_type'] = 0
     row_goods['extra_value'] = 0
     row_goods['section'] = 1
-    row_goods['tax_code'] = 1
+    row_goods['tax_code'] = 6
     row_goods['payment_form_code'] = 0
     
     data['goods'].append(row_goods)
     
     data = json.dumps(data, default=json_serial)
-    
+
+    print(data)   
+ 
     r = requests.post(f"""http://{API_SERVER}:{API_PORT}/{API_MAKE_PAYMENT}""", data=data)
     
     print('API_SERVER response:')
@@ -160,7 +179,7 @@ def do_loop():
 
     for x in result:
         print(x)
-        res = make_payment(x['EMAIL'], x['SUMM_PAYED'], x['C_ADDRESS'])
+        res = make_payment(x['EMAIL'], x['SUMM_PAYED'], x['ACCOUNT_ID'])
         
         if not res is None:
             set_result(res, x)

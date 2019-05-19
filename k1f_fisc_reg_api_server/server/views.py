@@ -1,4 +1,4 @@
-from flask import render_template, request, jsonify
+﻿from flask import render_template, request, jsonify
 import server.fisc_reg_exchange as fisc_reg
 from server.conf import *
 from server import app
@@ -191,6 +191,7 @@ def make_payment():
         res = fisc_reg.do_oper('AddGoods', sock, session_key=session_key, code=code, id=id, name=name, qty=qty, section=section, tax_code=tax_code, payment_form_code=payment_form_code, price=price, extra_type=extra_type, extra_value=extra_value)
         
         if res['result'] != 0:
+            fisc_reg.do_oper('CloseSession', sock, session_key=session_key)
             raise Exception('AddGoods error: ' + str(res))
 
     client = data['client']
@@ -204,6 +205,7 @@ def make_payment():
     res = fisc_reg.do_oper('CloseCheck', sock, session_key=session_key, client=client, add_info=add_info, cash=cash, ecash=ecash, prepayment=prepayment, credit=credit, consideration=consideration)
 
     if res['result'] != 0:
+        fisc_reg.do_oper('CloseSession', sock, session_key=session_key)
         raise Exception('CloseCheck error: ' + str(res))
 
     res = json.dumps(res, default=json_serial)

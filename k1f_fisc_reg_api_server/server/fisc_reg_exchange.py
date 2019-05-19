@@ -76,7 +76,7 @@ def do_oper(oper, sock, **data):
         d['qty'] = data['qty']
         d['section'] = data['section']
         d['taxCode'] = data['tax_code']
-        d['paymentFormCode'] = data['payment_form_code']
+        d['paymentFormCode'] = PAYMENT_FROM_CODE
         d['price'] = data['price']
         
         extra = {'type': data['extra_type'], 'value': data['extra_value']}
